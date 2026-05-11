@@ -2,6 +2,7 @@ package com.palestine.roots.ui
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.HapticFeedbackConstants
 import android.widget.ImageView
 import android.widget.TextView
