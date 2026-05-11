@@ -40,7 +40,7 @@ data class SiteEntity(
     val historyEn: String,
     
     @ColumnInfo(name = "image_url")
-    @SerializedName("image_url")
+    @SerializedName("imageUrl")
     val imageUrl: String,
     
     @SerializedName("latitude")
@@ -57,7 +57,7 @@ data class SiteEntity(
     val categoryEn: String,
     
     @ColumnInfo(name = "foundation_year")
-    @SerializedName("foundation_year")
+    @SerializedName("foundationYear")
     val foundationYear: String?,
     
     @ColumnInfo(name = "is_favorite", defaultValue = "0")

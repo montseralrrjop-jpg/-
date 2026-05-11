@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@Database(entities = [SiteEntity::class], version = 3, exportSchema = false)
+@Database(entities = [SiteEntity::class], version = 4, exportSchema = false)
 abstract class PalestineDatabase : RoomDatabase() {
 
     abstract fun siteDao(): SiteDao
