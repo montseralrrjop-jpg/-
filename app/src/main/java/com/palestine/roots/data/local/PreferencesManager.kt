@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.channels.awaitClose
 
 class PreferencesManager(private val context: Context) {
@@ -21,33 +20,33 @@ class PreferencesManager(private val context: Context) {
     val isDarkMode: Flow<Boolean> = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             if (key == KEY_DARK_MODE) {
-                offer(prefs.getBoolean(KEY_DARK_MODE, false))
+                trySend(prefs.getBoolean(KEY_DARK_MODE, false))
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
-        offer(prefs.getBoolean(KEY_DARK_MODE, false))
+        trySend(prefs.getBoolean(KEY_DARK_MODE, false))
         awaitClose { prefs.unregisterOnSharedPreferenceChangeListener(listener) }
     }
 
     val language: Flow<String> = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             if (key == KEY_LANGUAGE) {
-                offer(prefs.getString(KEY_LANGUAGE, "ar") ?: "ar")
+                trySend(prefs.getString(KEY_LANGUAGE, "ar") ?: "ar")
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
-        offer(prefs.getString(KEY_LANGUAGE, "ar") ?: "ar")
+        trySend(prefs.getString(KEY_LANGUAGE, "ar") ?: "ar")
         awaitClose { prefs.unregisterOnSharedPreferenceChangeListener(listener) }
     }
 
     val isOnboardingCompleted: Flow<Boolean> = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             if (key == KEY_ONBOARDING_COMPLETED) {
-                offer(prefs.getBoolean(KEY_ONBOARDING_COMPLETED, false))
+                trySend(prefs.getBoolean(KEY_ONBOARDING_COMPLETED, false))
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
-        offer(prefs.getBoolean(KEY_ONBOARDING_COMPLETED, false))
+        trySend(prefs.getBoolean(KEY_ONBOARDING_COMPLETED, false))
         awaitClose { prefs.unregisterOnSharedPreferenceChangeListener(listener) }
     }
 
