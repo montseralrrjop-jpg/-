@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.palestine.roots.R
 import com.palestine.roots.data.local.PreferencesManager
 import com.palestine.roots.data.local.db.PalestineDatabase
 import com.palestine.roots.data.repository.SiteRepositoryImpl
