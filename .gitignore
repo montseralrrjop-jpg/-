@@ -1,0 +1,36 @@
+## Gradle
+.gradle/
+/build/
+**/build/
+
+# Local configuration
+local.properties
+keystore.properties
+
+# IntelliJ
+.idea/
+*.iml
+
+# Android Studio captures
+/captures/
+
+# Kotlin
+.kotlin/
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (Firebase - removed)
+google-services.json
+
+# OS files
+.DS_Store
+*.log
+Thumbs.db
+
+# Secrets
+*.env
+
+# JDK
+oracleJdk-26/

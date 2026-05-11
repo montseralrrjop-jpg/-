@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Palestine Roots</string>
+    <string name="explore_sites">Explore Sites</string>
+    <string name="search_hint">Search for an archaeological site…</string>
+    <string name="filter_all">All</string>
+    <string name="filter_religious">Religious</string>
+    <string name="filter_archaeological">Archaeological</string>
+    <string name="filter_natural">Natural</string>
+    <string name="filter_historical">Historical</string>
+    <string name="filter_heritage">Heritage</string>
+    <string name="details_title">Details</string>
+    <string name="location_label">Location:</string>
+    <string name="history_label">History:</string>
+    <string name="description_label">Description:</string>
+    <string name="error_loading">Error loading data</string>
+    <string name="retry_button">Back</string>
+    <string name="onboarding_welcome">Welcome to Palestine Roots</string>
+    <string name="onboarding_desc">Discover the history and civilization of ancient Palestine through a virtual tour of archaeological and heritage sites.</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_settings">Settings</string>
+    <string name="settings_language">Change Language</string>
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="next_button">Next</string>
+    <string name="share_label">Share</string>
+    <string name="share_chooser_title">Share site via:</string>
+    <string name="google_maps_label">View in Google Maps</string>
+    <string name="no_results">No search results found</string>
+    <string name="favorites_empty">Your favorites list is currently empty</string>
+    <string name="onboarding_map_title">Interactive Maps</string>
+    <string name="onboarding_map_desc">Browse archaeological sites directly on the map and get accurate coordinates for every historical landmark.</string>
+    <string name="onboarding_fav_title">Keep Favorites</string>
+    <string name="onboarding_fav_desc">Add sites of interest to your favorites list to access them easily even without internet.</string>
+    <string name="share_message">Discover Palestine Heritage: %1$s\n\nCity: %2$s\nCategory: %3$s\nHistory: %4$s\nMap: https://www.google.com/maps/search/?api=1&amp;query=%5$s,%6$s\n\nShared via Palestine Roots app</string>
+    <string name="login_guest">Explore as Guest</string>
+    <string name="login_privacy_note">All data is stored on your device only\nWe do not require any personal information</string>
+    <string name="foundation_year_label">Foundation Year:</string>
+    <string name="category_label">Category:</string>
+    <string name="city_label">City:</string>
+    <string name="sites_count">archaeological sites</string>
+    <string name="skip_button">Skip</string>
+</resources>

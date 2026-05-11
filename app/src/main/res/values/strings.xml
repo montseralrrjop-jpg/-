@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">جذور فلسطين</string>
+    <string name="explore_sites">استكشف المواقع</string>
+    <string name="search_hint">بحث عن موقع أثري...</string>
+    <string name="filter_all">الكل</string>
+    <string name="filter_religious">ديني</string>
+    <string name="filter_archaeological">أثري</string>
+    <string name="filter_natural">طبيعي</string>
+    <string name="filter_historical">تاريخي</string>
+    <string name="filter_heritage">تراثي</string>
+    <string name="details_title">التفاصيل</string>
+    <string name="location_label">الموقع:</string>
+    <string name="history_label">التاريخ:</string>
+    <string name="description_label">الوصف:</string>
+    <string name="error_loading">خطأ في تحميل البيانات</string>
+    <string name="retry_button">رجوع</string>
+    <string name="onboarding_welcome">مرحباً بك في جذور فلسطين</string>
+    <string name="onboarding_desc">اكتشف تاريخ وحضارة فلسطين العريقة من خلال رحلة افتراضية للمواقع الأثرية والتراثية</string>
+    <string name="onboarding_get_started">ابدأ الآن</string>
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_map">الخريطة</string>
+    <string name="nav_favorites">المفضلة</string>
+    <string name="nav_settings">الإعدادات</string>
+    <string name="settings_language">تغيير اللغة</string>
+    <string name="settings_dark_mode">الوضع الليلي</string>
+    <string name="next_button">التالي</string>
+    <string name="share_label">مشاركة</string>
+    <string name="share_chooser_title">مشاركة الموقع عبر:</string>
+    <string name="google_maps_label">عرض في خرائط جوجل</string>
+    <string name="no_results">لم نجد نتائج للبحث</string>
+    <string name="favorites_empty">قائمة مفضلاتك فارغة حالياً</string>
+    <string name="onboarding_map_title">خرائط تفاعلية</string>
+    <string name="onboarding_map_desc">تصفح المواقع الأثرية على الخريطة مباشرة واحصل على إحداثيات دقيقة لكل معلم تاريخي.</string>
+    <string name="onboarding_fav_title">حافظ على المفضلة</string>
+    <string name="onboarding_fav_desc">أضف المواقع التي تهمك إلى قائمتك المفضلة لتصل إليها بسهولة حتى بدون إنترنت.</string>
+    <string name="share_message">اكتشف تراث فلسطين: %1$s\n\nالمحافظة: %2$s\nالتصنيف: %3$s\nالتاريخ: %4$s\nالموقع: https://www.google.com/maps/search/?api=1&amp;query=%5$s,%6$s\n\nتم المشاركة عبر تطبيق جذور فلسطين</string>
+    <string name="login_guest">استكشف كضيف</string>
+    <string name="login_privacy_note">جميع البيانات محفوظة على جهازك فقط\nلا نحتاج إلى أي معلومات شخصية</string>
+    <string name="foundation_year_label">سنة التأسيس:</string>
+    <string name="category_label">التصنيف:</string>
+    <string name="city_label">المحافظة:</string>
+    <string name="sites_count">موقع أثري</string>
+    <string name="skip_button">تخطي</string>
+</resources>

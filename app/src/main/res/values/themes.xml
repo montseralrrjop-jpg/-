@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PalestineRoots" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/earth_brown</item>
+        <item name="colorPrimaryVariant">@color/olive_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/olive_green</item>
+        <item name="colorSecondaryVariant">@color/embroidery_red</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorAccent">@color/embroidery_red</item>
+        <item name="android:statusBarColor">@color/earth_brown</item>
+        <item name="android:navigationBarColor">@color/earth_brown</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.PalestineRoots.Splash" parent="Theme.PalestineRoots">
+        <item name="android:windowBackground">@drawable/gradient_brown_green</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>
