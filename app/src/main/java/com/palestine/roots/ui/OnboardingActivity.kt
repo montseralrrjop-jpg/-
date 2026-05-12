@@ -1,5 +1,6 @@
 package com.palestine.roots.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import com.palestine.roots.data.local.PreferencesManager
 import com.palestine.roots.data.local.db.PalestineDatabase
 import com.palestine.roots.data.repository.SiteRepositoryImpl
 import com.palestine.roots.databinding.ActivityOnboardingBinding
+import com.palestine.roots.util.LocaleHelper
 import com.palestine.roots.viewmodel.HomeViewModel
 
 class OnboardingActivity : AppCompatActivity() {
@@ -41,6 +43,10 @@ class OnboardingActivity : AppCompatActivity() {
             description = "احفظ المواقع المفضلة لديك وعد إليها في أي وقت لتستكشفها وتشاركها مع الآخرين."
         )
     )
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,9 +110,9 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun updateButton(position: Int) {
         binding.btnOnboardingNext.text = if (position == onboardingItems.size - 1) {
-            "ابدأ الآن"
+            getString(R.string.onboarding_get_started)
         } else {
-            "التالي"
+            getString(R.string.next_button)
         }
     }
 }

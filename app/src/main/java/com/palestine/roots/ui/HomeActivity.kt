@@ -15,6 +15,7 @@ import com.palestine.roots.data.local.PreferencesManager
 import com.palestine.roots.data.local.db.PalestineDatabase
 import com.palestine.roots.data.repository.SiteRepositoryImpl
 import com.palestine.roots.databinding.ActivityHomeBinding
+import com.palestine.roots.util.LocaleHelper
 import com.palestine.roots.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
@@ -33,12 +34,15 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var siteAdapter: SiteAdapter
     private var currentLang = "ar"
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setupRecyclerView()
-        setupProvinceChips()
         setupSearch()
         setupToolbarActions()
         observeViewModel()
@@ -66,8 +70,10 @@ class HomeActivity : AppCompatActivity() {
         val chipGroup = binding.cgProvinces
         chipGroup.removeAllViews()
 
+        // "All" chip – uses string resource so it switches with locale
+        val allLabel = getString(R.string.filter_all)
         val allChip = Chip(this).apply {
-            text = "الكل"
+            text = allLabel
             isClickable = true
             isCheckable = true
             isChecked = true
@@ -78,13 +84,16 @@ class HomeActivity : AppCompatActivity() {
         }
         chipGroup.addView(allChip)
 
-        viewModel.provinces.forEach { province ->
+        // Province chips – display name depends on current language
+        viewModel.getProvinceNames(currentLang).forEach { displayName ->
             val chip = Chip(this).apply {
-                text = province
+                text = displayName
                 isClickable = true
                 isCheckable = true
                 setOnClickListener {
-                    viewModel.filterByCity(province)
+                    // Always resolve to Arabic name for the DB query
+                    val arabicCity = viewModel.resolveArabicCityName(displayName)
+                    viewModel.filterByCity(arabicCity)
                     clearChipSelection(chipGroup, this)
                 }
             }
@@ -118,6 +127,9 @@ class HomeActivity : AppCompatActivity() {
         binding.ibLanguage.setOnClickListener {
             currentLang = if (currentLang == "ar") "en" else "ar"
             viewModel.setLanguage(currentLang)
+            // Apply the new locale and recreate so all resources reload
+            LocaleHelper.setLocale(this, currentLang)
+            recreate()
         }
 
         binding.ibDarkMode.setOnClickListener {
@@ -146,6 +158,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                     is HomeViewModel.UiState.Success -> {
                         binding.rvSites.visibility = View.VISIBLE
+                        siteAdapter.language = currentLang
                         siteAdapter.submitList(state.sites)
                     }
                     is HomeViewModel.UiState.Error -> {
@@ -158,6 +171,8 @@ class HomeActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.language.collectLatest { lang ->
                 currentLang = lang
+                siteAdapter.language = lang
+                setupProvinceChips()
             }
         }
     }

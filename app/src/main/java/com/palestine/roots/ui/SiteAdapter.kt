@@ -18,6 +18,15 @@ class SiteAdapter(
     private val onFavoriteClick: (Site) -> Unit
 ) : ListAdapter<Site, SiteAdapter.SiteViewHolder>(SiteDiffCallback()) {
 
+    /** Current display language – "ar" or "en". Affects which fields are shown. */
+    var language: String = "ar"
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyDataSetChanged()
+            }
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SiteViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_site, parent, false)
@@ -26,7 +35,7 @@ class SiteAdapter(
 
     override fun onBindViewHolder(holder: SiteViewHolder, position: Int) {
         val site = getItem(position)
-        holder.bind(site)
+        holder.bind(site, language)
     }
 
     inner class SiteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -38,10 +47,10 @@ class SiteAdapter(
         private val tvSiteName: TextView = itemView.findViewById(R.id.tv_site_name)
         private val tvSiteCity: TextView = itemView.findViewById(R.id.tv_site_city)
 
-        fun bind(site: Site) {
-            tvSiteName.text = site.name
-            tvSiteCity.text = site.city
-            tvCategory.text = site.category
+        fun bind(site: Site, lang: String) {
+            tvSiteName.text = if (lang == "en") site.nameEn else site.name
+            tvSiteCity.text = if (lang == "en") site.cityEn else site.city
+            tvCategory.text = if (lang == "en") site.categoryEn else site.category
 
             // Load image from assets
             // Glide supports file:///android_asset/ URIs natively

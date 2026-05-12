@@ -36,11 +36,36 @@ class HomeViewModel(
     val favoriteSites = repository.getFavoriteSites()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    /** Province with both Arabic and English names stored together. */
+    data class Province(val ar: String, val en: String)
+
     val provinces = listOf(
-        "القدس", "رام الله والبيرة", "نابلس", "جنين",
-        "طولكرم", "قلقيلية", "سلفيت", "أريحا والأغوار",
-        "الخليل", "بيت لحم"
+        Province("القدس", "Jerusalem"),
+        Province("رام الله والبيرة", "Ramallah & Al-Bireh"),
+        Province("نابلس", "Nablus"),
+        Province("جنين", "Jenin"),
+        Province("طولكرم", "Tulkarem"),
+        Province("قلقيلية", "Qalqilya"),
+        Province("سلفيت", "Salfit"),
+        Province("أريحا والأغوار", "Jericho & Jordan Valley"),
+        Province("الخليل", "Hebron"),
+        Province("بيت لحم", "Bethlehem")
     )
+
+    /** Return province names in the requested language. */
+    fun getProvinceNames(lang: String): List<String> {
+        return provinces.map { if (lang == "en") it.en else it.ar }
+    }
+
+    /**
+     * Given a display name (could be Arabic or English),
+     * always return the Arabic name because the database
+     * `city` column stores Arabic values.
+     */
+    fun resolveArabicCityName(displayName: String): String {
+        return provinces.find { it.ar == displayName || it.en == displayName }?.ar
+            ?: displayName
+    }
 
     private var currentCity: String? = null
 

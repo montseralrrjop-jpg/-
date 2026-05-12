@@ -1,5 +1,6 @@
 package com.palestine.roots.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,7 +15,9 @@ import com.palestine.roots.data.local.db.PalestineDatabase
 import com.palestine.roots.data.repository.SiteRepositoryImpl
 import com.palestine.roots.databinding.ActivityDetailBinding
 import com.palestine.roots.domain.model.Site
+import com.palestine.roots.util.LocaleHelper
 import com.palestine.roots.viewmodel.HomeViewModel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
@@ -28,14 +31,23 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private var currentSite: Site? = null
+    private var currentLang: String = "ar"
 
     companion object {
         const val EXTRA_SITE_ID = "extra_site_id"
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        lifecycleScope.launch {
+            currentLang = viewModel.language.first()
+        }
 
         val siteId = intent.getStringExtra(EXTRA_SITE_ID)
         if (siteId == null) {
@@ -61,22 +73,25 @@ class DetailActivity : AppCompatActivity() {
                     currentSite = site
                     displaySite(site)
                 } else {
-                    Toast.makeText(this@DetailActivity, "الموقع غير موجود", Toast.LENGTH_SHORT).show()
+                    val msg = if (currentLang == "en") "Site not found" else "الموقع غير موجود"
+                    Toast.makeText(this@DetailActivity, msg, Toast.LENGTH_SHORT).show()
                     finish()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@DetailActivity, "حدث خطأ", Toast.LENGTH_SHORT).show()
+                val msg = if (currentLang == "en") "An error occurred" else "حدث خطأ"
+                Toast.makeText(this@DetailActivity, msg, Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
     }
 
     private fun displaySite(site: Site) {
-        binding.tvDetailSiteName.text = site.name
-        binding.tvDetailCityChip.text = site.city
-        binding.tvDetailDescription.text = site.description
-        binding.tvDetailHistory.text = site.history
-        binding.tvDetailCategoryBadge.text = site.category
+        val lang = currentLang
+        binding.tvDetailSiteName.text = if (lang == "en") site.nameEn else site.name
+        binding.tvDetailCityChip.text = if (lang == "en") site.cityEn else site.city
+        binding.tvDetailDescription.text = if (lang == "en") site.descriptionEn else site.description
+        binding.tvDetailHistory.text = if (lang == "en") site.historyEn else site.history
+        binding.tvDetailCategoryBadge.text = if (lang == "en") site.categoryEn else site.category
 
         if (site.foundationYear.isNullOrEmpty()) {
             binding.tvDetailYearChip.visibility = View.GONE

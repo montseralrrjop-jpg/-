@@ -1,5 +1,6 @@
 package com.palestine.roots.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import com.palestine.roots.data.local.PreferencesManager
 import com.palestine.roots.data.local.db.PalestineDatabase
 import com.palestine.roots.data.repository.SiteRepositoryImpl
 import com.palestine.roots.databinding.ActivitySplashBinding
+import com.palestine.roots.util.LocaleHelper
 import com.palestine.roots.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -23,6 +25,10 @@ class SplashActivity : AppCompatActivity() {
         val repo = SiteRepositoryImpl(dao)
         val prefs = PreferencesManager(this)
         HomeViewModel.Factory(repo, prefs)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

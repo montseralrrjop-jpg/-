@@ -1,5 +1,6 @@
 package com.palestine.roots.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,8 +12,10 @@ import com.palestine.roots.data.local.PreferencesManager
 import com.palestine.roots.data.local.db.PalestineDatabase
 import com.palestine.roots.data.repository.SiteRepositoryImpl
 import com.palestine.roots.databinding.ActivityFavoritesBinding
+import com.palestine.roots.util.LocaleHelper
 import com.palestine.roots.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class FavoritesActivity : AppCompatActivity() {
@@ -26,6 +29,10 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     private lateinit var siteAdapter: SiteAdapter
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.applyLocale(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +65,12 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     private fun observeFavorites() {
+        lifecycleScope.launch {
+            viewModel.language.collectLatest { lang ->
+                siteAdapter.language = lang
+            }
+        }
+
         lifecycleScope.launch {
             viewModel.favoriteSites.collectLatest { favorites ->
                 siteAdapter.submitList(favorites)

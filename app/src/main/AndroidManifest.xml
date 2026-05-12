@@ -50,10 +50,10 @@
             android:name=".ui.DetailActivity"
             android:theme="@style/Theme.PalestineRoots" />
 
-        <!-- Google Maps API Key -->
+        <!-- Google Maps API Key – value is injected from local.properties -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="" />
+            android:value="${MAPS_API_KEY}" />
 
     </application>
 
